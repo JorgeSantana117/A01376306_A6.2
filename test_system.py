@@ -66,6 +66,37 @@ class TestHotelManagement(unittest.TestCase):
         res = self.hm.display_hotel("H1")
         self.assertIsNone(res)
 
+    def test_delete_nonexistent_hotel(self):
+        """Negative Test 1: Deleting a hotel that doesn't exist."""
+        # Should not crash even if ID is missing
+        self.hm.delete_hotel("NON_EXISTENT")
+        self.assertIsNone(self.hm.display_hotel("NON_EXISTENT"))
+
+    def test_modify_nonexistent_customer(self):
+        """Negative Test 2: Modifying a customer that doesn't exist."""
+        # Logic should skip modification without error
+        self.cm.modify_customer("MISSING_CUST", name="No One")
+        self.assertIsNone(self.cm.display_customer("MISSING_CUST"))
+
+    def test_cancel_nonexistent_reservation(self):
+        """Negative Test 3: Canceling a reservation that doesn't exist."""
+        # Should return False or handle gracefully
+        result = self.rm.cancel_reservation("FAKE_RES", "H1", self.hm)
+        self.assertFalse(result)
+
+    def test_reserve_nonexistent_hotel(self):
+        """Creating a reservation for a hotel that doesn't exist."""
+        result = self.rm.create_reservation("R1", "C1", "999", self.hm)
+        self.assertFalse(result)
+
+    def test_cancel_room_when_zero(self):
+        """Canceling a room when occupied_rooms is already 0."""
+        self.hm.create_hotel("H2", "Empty Hotel", "City", 10)
+        # Should not go into negative numbers
+        self.hm.cancel_room_reservation("H2")
+        hotel = self.hm.display_hotel("H2")
+        self.assertEqual(hotel['occupied_rooms'], 0)
+
 
 if __name__ == '__main__':
     unittest.main()
