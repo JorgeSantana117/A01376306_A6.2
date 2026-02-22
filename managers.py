@@ -90,3 +90,21 @@ class CustomerManager(BaseManager):
             if c['customer_id'] == customer_id:
                 c.update(kwargs)
         self._save(data)
+
+class ReservationManager(BaseManager):
+    def create_reservation(self, res_id, cust_id, hotel_id, hotel_mgr):
+        if hotel_mgr.reserve_room(hotel_id):
+            data = self._load()
+            data.append(Reservation(res_id, cust_id, hotel_id).to_dict())
+            self._save(data)
+            return True
+        return False
+
+    def cancel_reservation(self, res_id, hotel_id, hotel_mgr):
+        data = self._load()
+        if any(r['reservation_id'] == res_id for r in data):
+            data = [r for r in data if r['reservation_id'] != res_id]
+            self._save(data)
+            hotel_mgr.cancel_room_reservation(hotel_id)
+            return True
+        return False
