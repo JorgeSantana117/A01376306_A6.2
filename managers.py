@@ -66,3 +66,27 @@ class HotelManager(BaseManager):
                     self._save(data)
                     return True
         return False
+    
+class CustomerManager(BaseManager):
+    def create_customer(self, customer_id, name, email):
+        data = self._load()
+        data.append(Customer(customer_id, name, email).to_dict())
+        self._save(data)
+
+    def delete_customer(self, customer_id):
+        data = [c for c in self._load() if c['customer_id'] != customer_id]
+        self._save(data)
+
+    def display_customer(self, customer_id):
+        for c in self._load():
+            if c['customer_id'] == customer_id:
+                print(f"Customer: {c}")
+                return c
+        return None
+
+    def modify_customer(self, customer_id, **kwargs):
+        data = self._load()
+        for c in data:
+            if c['customer_id'] == customer_id:
+                c.update(kwargs)
+        self._save(data)
