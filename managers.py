@@ -1,6 +1,6 @@
 import json
 import os
-from .models import Hotel, Customer, Reservation
+from models import Hotel, Customer, Reservation
 
 class BaseManager:
     def __init__(self, filename):
