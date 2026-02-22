@@ -47,7 +47,7 @@ def hotel_menu(hotel_mgr):
     Sub-menu for Hotel-related operations.
     """
     print("\n-- Hotel Menu --")
-    print("a. Create Hotel\nb. Delete Hotel\nc. Display Hotel\nd. Modify Hotel")
+    print("a.Create Hotel\nb.Delete Hotel\nc.Display Hotel\nd.Modify Hotel")
     sub_choice = input("Select: ")
 
     if sub_choice == 'a':

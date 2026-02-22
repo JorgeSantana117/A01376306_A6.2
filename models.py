@@ -3,6 +3,8 @@ This module contains the data models for the Hotel Management System.
 """
 
 
+# pylint: disable=too-few-public-methods
+
 class Hotel:
     """
     Represents a Hotel entity.

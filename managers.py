@@ -8,6 +8,8 @@ import os
 from models import Hotel, Customer, Reservation
 
 
+# pylint: disable=too-few-public-methods
+
 class BaseManager:
     """Handles generic file persistence behavior."""
 
