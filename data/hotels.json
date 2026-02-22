@@ -1,0 +1,16 @@
+[
+    {
+        "hotel_id": "H1",
+        "name": "Hotel Inn",
+        "location": "Mexico City",
+        "total_rooms": 34,
+        "occupied_rooms": 1
+    },
+    {
+        "hotel_id": "H2",
+        "name": "Hotel Fiesta",
+        "location": "Guadalajara",
+        "total_rooms": 56,
+        "occupied_rooms": 1
+    }
+]
